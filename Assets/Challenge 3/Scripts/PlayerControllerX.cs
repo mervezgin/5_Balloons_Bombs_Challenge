@@ -7,7 +7,7 @@ public class PlayerControllerX : MonoBehaviour
     Rigidbody playerRb;
     AudioSource playerAudio;
 
-    [SerializeField]float playerForce;
+    [SerializeField] float playerForce;
     [SerializeField] float gravityModifier;
 
     [SerializeField] ParticleSystem explosionParticle;
