@@ -4,31 +4,26 @@ using UnityEngine;
 
 public class SpawnManagerX : MonoBehaviour
 {
-    public GameObject[] objectPrefabs;
-    private float spawnDelay = 2;
-    private float spawnInterval = 1.5f;
+    [SerializeField] GameObject[] projectilePrefabs;
 
-    private PlayerControllerX playerControllerScript;
+    PlayerControllerX playerControllerX;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("PrawnsObject", spawnDelay, spawnInterval);
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerControllerX>();
+        InvokeRepeating("SpawnObjects", 2, 1.5f);
+        playerControllerX = GameObject.Find("Player").GetComponent<PlayerControllerX>();
     }
+
 
     // Spawn obstacles
     void SpawnObjects ()
     {
-        // Set random spawn location and random object index
-        Vector3 spawnLocation = new Vector3(30, Random.Range(5, 15), 0);
-        int index = Random.Range(0, objectPrefabs.Length);
-
-        // If game is still active, spawn new object
-        if (!playerControllerScript.gameOver)
+        if (playerControllerX.gameOver == false)
         {
-            Instantiate(objectPrefabs[index], spawnLocation, objectPrefabs[index].transform.rotation);
+            Vector3 spawnPos = new Vector3(Random.Range(10, 20), Random.Range(5, 13), 0);
+            int spawnIndex = Random.Range(0, projectilePrefabs.Length);
+            Instantiate(projectilePrefabs[spawnIndex], spawnPos, projectilePrefabs[spawnIndex].transform.rotation);
         }
-
     }
 }
